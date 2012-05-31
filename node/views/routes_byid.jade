@@ -1,0 +1,46 @@
+script(type='text/javascript', src='http://maps.googleapis.com/maps/api/js?key=AIzaSyCGJgqgJHFGc7JQ7mazozs9ftB9E0MBkeA&sensor=false')
+script(type='text/javascript', src='/static/javascripts/map_editor.js')
+script(type='text/javascript')
+	var ro = JSON.parse('!{data.route.route}');
+
+	$(document).ready(function(){
+	
+		createMap();
+
+		google.maps.event.addListenerOnce(map,'tilesloaded',function(event){putPath()});
+		
+		/*
+		*/
+	})
+	
+	function putPath(){
+	
+		for (var i=0;i<ro.length;i++){
+			var marker = new google.maps.Marker({
+				position: new google.maps.LatLng(ro[i].lat,ro[i].lng),
+				draggable:false,
+				icon:types[ro[i].type].ico,
+				animation: google.maps.Animation.DROP,
+				map: map
+			})
+			marker.text_ = types[ro[i].type].text;
+			marker.type_ = ro[i].type;
+			google.maps.event.addListener(marker, 'click', function(event) {
+				showPoint(event,marker)
+			})
+			markers.push(marker);
+		}
+		repaintPath();
+	
+	}
+form(action='/user/action/like',method='post')
+	h1(style='float:left')
+		| Просмотр маршрута ##{data.route.id}
+	input(type='hidden',name='id',value='#{data.route.id}')
+	input(type='submit',style='float:right',class='btn btn-success',value='Мне нравится!')
+br
+h3
+	= data.route.name
+#map
+br
+= data.route.desc

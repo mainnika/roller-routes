@@ -1,0 +1,56 @@
+html,body {
+	width:100%;
+	height:100%;
+	text-shadow: 1px 0px 1px #AAA;
+}
+
+.header{
+	text-align: center;
+}
+
+
+.title{
+	margin-top:100px;
+}
+.text{
+	font-size: 42px;
+	font-weight: bold;
+	font-family: 'Marck Script', cursive;
+	float: left;
+}
+.ver{
+	float: left;
+	margin-top: -13px;
+}
+
+.titleimg{
+	height:200px;
+}
+
+.all{
+	margin-top: 15px;
+	min-height:400px;
+}
+
+.footer{
+	text-align: center;
+}
+
+.sidebar{
+	text-align: center;
+}
+
+
+
+
+#map{
+	height:640px;
+	width:100%;	
+}
+#map img{
+	max-width: none;
+}
+.arrowimg {
+	margin-left:-8px;
+	margin-top:-8px;
+}

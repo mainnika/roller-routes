@@ -1,0 +1,22 @@
+h1
+	| Мои маршруты:
+br
+- for (var i in data.routes){
+	.row-fluid
+		.span6
+			h4
+				a(href='/routes/#{data.routes[i].id}') #{data.routes[i].name} (#{data.routes[i].dist} м.)
+			= data.routes[i].desc
+			hr
+			form(action='/user/action/publictoggle',method='post')
+				input(type='hidden',name='id',value='#{data.routes[i].id}')
+				- if (data.routes[i].public == 0){
+					input(type='submit',class='btn btn-danger',value='Выставить на голосование')
+				- }else{
+					input(type='submit',class='btn btn-success',value='Снять с голосования')
+				- }
+		.span6(style='text-align: right')
+			a(href='/routes/#{data.routes[i].id}')
+				img(src='#{data.routes[i].pre}')
+	hr
+- }

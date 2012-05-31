@@ -1,0 +1,60 @@
+script(type='text/javascript')
+	var ro = false;
+	
+	$(document).ready(function(){
+		createMap();
+	})
+
+	function validateForm(){
+		var ret = true;
+		
+		var error = document.createElement('div');
+		
+		if (document.addroute.name.value.trim()==''){
+			$('#name').addClass('error');
+			error.innerHTML += 'Нужно ввести имя маршрута<br>';
+			ret = false;
+		}else{
+			$('#name').removeClass('error');
+		}
+		if (markers.length<2){
+			error.innerHTML += 'Нужно поставить хотя бы две точки<br>';
+			ret = false;
+		}
+		
+		if (!ret){
+			$(error).addClass('alert alert-error');
+			$('#alerts').html('').append(error);
+		}else{
+			document.addroute.path.value = JSON.stringify(makePath());
+			document.addroute.pre.value = createStaticMapURL(path.getPath());
+		}
+		
+		return ret;
+	}
+	
+	$(document).ready(function(){
+		$('#b_add').popover({placement:'bottom',content:function(){
+			if (document.addroute.desc.value.trim()==''){
+				return 'Вы не заполнили поле «Описание», оно необязательное, но позволит Вам выразить свои мысли по поводу маршрута<br>Оно находится под картой, если Вы его не заметили';
+			}else{
+				return false;
+			}
+		}});
+	})
+
+script(type='text/javascript', src='http://maps.googleapis.com/maps/api/js?key=AIzaSyCGJgqgJHFGc7JQ7mazozs9ftB9E0MBkeA&sensor=false')
+script(type='text/javascript', src='/static/javascripts/map_editor.js')
+h1
+	| Добавление нового маршрута:
+br
+form(name='addroute',method='post',onsubmit='return validateForm()')
+	#alerts
+	#name.control-group
+		input(name='name',type='text',placeholder='Название для маршрута')
+		input(type='submit',id='b_add',class='btn btn-primary',value='Add route!',style='float:right')
+	#map
+	br
+	textarea(name='desc',placeholder='Описание',style='width: 450px')
+	input(type='hidden',value='',name='path')
+	input(type='hidden',value='',name='pre')	

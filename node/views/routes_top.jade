@@ -1,0 +1,41 @@
+h1 Топ 10 маршрутов:
+br
+- for (var i in data.routes){
+
+	- if (i == 0){
+		//
+		// Первый маршрут по голосам
+		//
+		.row-fluid.alert-success.alert(style='padding-right: 8px;margin-left: -10px')
+			.span6
+				h4
+					a(href='/routes/#{data.routes[i].id}') #{data.routes[i].name} (#{data.routes[i].dist} м.)
+				= data.routes[i].desc
+				br
+				| Автор: #{data.routes[i].owner}
+				hr
+				h2 Голосов: #{data.routes[i].rate}
+			.span6(style='text-align: right')
+				img(src='#{data.routes[i].pre}')
+		hr
+	
+	- }else{
+		//
+		// Остальные маршрутики
+		//
+		.row-fluid
+			.span6
+				h4
+					a(href='/routes/#{data.routes[i].id}') #{data.routes[i].name} (#{data.routes[i].dist} м.)
+				= data.routes[i].desc
+				br
+				| Автор: #{data.routes[i].owner}
+				hr
+				h2 Голосов: #{data.routes[i].rate}
+			.span6(style='text-align: right')
+				a(href='/routes/#{data.routes[i].id}')
+					img(src='#{data.routes[i].pre}')
+		hr
+	- }
+	
+- }

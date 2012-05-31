@@ -1,0 +1,24 @@
+h1
+	| Последние добавленные:
+br
+- for (var i in data.routes){
+	.row-fluid
+		.span6
+			h4
+				a(href='/routes/#{data.routes[i].id}') #{data.routes[i].name} (#{data.routes[i].dist} м.)
+			= data.routes[i].desc
+			br
+			| Автор: #{data.routes[i].owner}
+			hr
+			form(action='/user/action/like',method='post')
+				input(type='hidden',name='id',value='#{data.routes[i].id}')
+				- if (!data.routes[i].unik){
+					input(type='submit',class='btn btn-success',value='Мне нравится!')
+				- }else{
+					input(type='submit',class='btn btn-danger',value='Мне не нравится')
+				- }
+		.span6(style='text-align: right')
+			a(href='/routes/#{data.routes[i].id}')
+				img(src='#{data.routes[i].pre}')
+	hr
+- }

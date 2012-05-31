@@ -1,0 +1,4 @@
+{ 
+  "name" : "_mapper",
+  "main" : "./_mapper.js"
+}

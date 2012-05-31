@@ -1,0 +1,64 @@
+doctype 5
+html
+	head
+		title= title
+		link(rel='shortcut icon', href='/static/favicon.ico')
+		link(rel='stylesheet', href='/static/stylesheets/main.css')
+		link(rel='stylesheet', href='/static/bootstrap/css/bootstrap.css')
+		link(href='http://fonts.googleapis.com/css?family=Marck+Script&subset=latin,cyrillic',rel='stylesheet',type='text/css')
+		script(type='text/javascript',src='http://code.jquery.com/jquery-1.7.2.min.js')
+		script(type='text/javascript',src='/static/bootstrap/js/bootstrap.js')
+		script(type='text/javascript',src='/static/bootstrap/js/bootstrap-tooltip.js')
+		script(type='text/javascript',src='/static/bootstrap/js/bootstrap-popover.js')
+		script(type='text/javascript')
+			function openVkAuth(){
+				window.open('http://oauth.vkontakte.ru/authorize?client_id=2955334&scope=wall&redirect_uri=http://r.mainnika.ru/user/login', 'displayWindow', 'width=850,height=500,status=no,toolbar=no,menubar=no').moveTo((document.width/2)-(850/2),100);
+			}
+	body
+		.container
+			.header
+				.row
+					.span8
+						.title
+							.text
+								| Ночные катания по Челябинску
+							.ver
+								a(href='/changelog') beta
+					.span4
+						a(href='/')
+							img(src='http://cs9570.userapi.com/u13527462/92713075/z_9d2936a3.jpg',class='titleimg')
+			hr
+			.all
+				.row
+					.span9!= body
+					.span3.sidebar
+						h3 Привет, 
+							= data.user.name
+							| :
+						br
+						- if(!data.user.login){
+							a(href='#', onclick='openVkAuth()')
+								img(src='http://vkontakte.ru/images/pics/openapidemo.png',alt='Login via VK')
+						- }else{
+							a(href='/routes/add') Нарисовать маршрут
+							br
+							a(href='/user/profile') Мои маршруты
+							br
+							a(href='/user/logout') Выйти
+						- }
+						hr
+						h3 Общее меню:
+						br
+						a(href='/routes/latest') Последние
+						br
+						a(href='/routes/top') Топ 10
+						//
+							hr
+							h3 Активность:
+							br
+							| Скоро будет…
+			.footer
+				= new Date().getFullYear()
+				|  / 
+				a(href='http://mainnika.ru')
+					| mainnika
