@@ -1,4 +1,5 @@
 script(type='text/javascript', src='http://maps.googleapis.com/maps/api/js?key=AIzaSyCGJgqgJHFGc7JQ7mazozs9ftB9E0MBkeA&sensor=false')
+script(type='text/javascript', src='http://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false')
 script(type='text/javascript', src='/static/javascripts/map_editor.js')
 script(type='text/javascript')
 	var ro = JSON.parse('!{data.route.route}');
@@ -20,7 +21,7 @@ script(type='text/javascript')
 				position: new google.maps.LatLng(ro[i].lat,ro[i].lng),
 				draggable:false,
 				icon:types[ro[i].type].ico,
-				animation: google.maps.Animation.DROP,
+		//		animation: google.maps.Animation.DROP,
 				map: map
 			})
 			marker.text_ = types[ro[i].type].text;
